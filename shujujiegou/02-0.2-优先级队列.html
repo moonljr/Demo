@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>优先级队列</title>
+</head>
+
+<body>
+
+    <script>
+        // 封装优先级队列
+        function PriorityQueue() {
+            // 封装属性
+            this.items = []
+            // 在 PriorityQueue 中重新创建一个内部类
+            function QueueElement(element, priority) {
+                this.element = element;
+                this.priority = priority;
+            }
+            // 实现插入方法
+            PriorityQueue.prototype.enqueue = function (element, priority) {
+                // 1 创建queueElement对象
+                var queueElement = new QueueElement(element, priority)
+                // 2 判断队列是否为空
+                if (PriorityQueue.isEmpty) {
+                    this.items.push(queueElement)
+                } else {
+                    // 2.1 定义一个临时变量 看是否插入到优先级队列中。 如果没有插入到优先级队列中在循环结束以后直接插入到队列的最后
+                    var added = false
+                    // 2.2 遍历队列 拿当前需要插入的队列与队列中的每一项去比较优先级
+                    for (let i = 0; i < this.items.length; i++) {
+                        // 如果当前需要插入的优先级比较高 就插入到队列中 并且改变临时变量标示已经插入到队列中了。 并且结束循环
+                        if (queueElement.priority < this.items[i].priority) {
+                            this.items.splice(i, 0, queueElement)
+                            added = true
+                            break
+                        }
+                    }
+                    // 如果没有插入到优先级队列中在循环结束以后直接插入到队列的最后
+                    if (!added) {
+                        this.items.push(queueElement)
+                    }
+                }
+            }
+            // 从队列中删除元素
+            PriorityQueue.prototype.dequeue = function () {
+                return this.items.shift()
+            }
+            // 查看队列前端的元素
+            PriorityQueue.prototype.front = function () {
+                return this.items[0]
+            }
+            // 队列是否为空
+            PriorityQueue.prototype.isEmpty = function (el) {
+                return this.items.length === 0
+            }
+            // 队列中元素的个数
+            PriorityQueue.prototype.size = function (el) {
+                return this.items.length
+            }
+            // 将队列转成字符串
+            PriorityQueue.prototype.toString = function (el) {
+                var resultString = ''
+                this.items.forEach(e => {
+                    resultString += e.element + '_' + e.priority + ''
+                });
+                return resultString
+            }
+        }
+        // 测试代码
+        var pq = new PriorityQueue()
+        pq.enqueue('abc', 111)
+        pq.enqueue('cba', 100)
+        pq.enqueue('nba', 50)
+        pq.enqueue('nbawe', 66)
+        // alert(pq)
+        console.log('pq', pq);
+        console.log('pqisEmpty', pq.isEmpty());
+        console.log('pqsize', pq.size());
+        console.log('pqfront', pq.front());
+        setTimeout(() => {
+            console.log('dequeue', pq.dequeue());
+        }, 2000);
+        console.log('pq', pq);
+    </script>
+</body>
+
+</html>
