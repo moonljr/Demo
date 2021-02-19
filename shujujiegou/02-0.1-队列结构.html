@@ -9,41 +9,42 @@
 </head>
 
 <body>
+  <script src="./js/queue.js"></script>
   <script>
     // 受限的线性结构
     // 队列 先进先出
     // 基于数组实现 与  基于链表实现 两种方式可以实现
 
     // 封装队列
-    function Queue() {
-      // 属性
-      this.items = []
-      // 方法
-      // 将元素添加到队列中
-      Queue.prototype.enqueue = function (el) {
-        this.items.push(el)
-      }
-      // 从队列中删除元素
-      Queue.prototype.dequeue = function () {
-        return this.items.shift()
-      }
-      // 查看队列前端的元素
-      Queue.prototype.front = function () {
-        return this.items[0]
-      }
-      // 队列是否为空
-      Queue.prototype.isEmpty = function (el) {
-        return this.items.length === 0
-      }
-      // 队列中元素的个数
-      Queue.prototype.size = function (el) {
-        return this.items.length
-      }
-      // 将队列转成字符串
-      Queue.prototype.toString = function (el) {
-        return this.items.join('')
-      }
-    }
+    // function Queue() {
+    //   // 属性
+    //   this.items = []
+    //   // 方法
+    //   // 将元素添加到队列中
+    //   Queue.prototype.enqueue = function (el) {
+    //     this.items.push(el)
+    //   }
+    //   // 从队列中删除元素
+    //   Queue.prototype.dequeue = function () {
+    //     return this.items.shift()
+    //   }
+    //   // 查看队列前端的元素
+    //   Queue.prototype.front = function () {
+    //     return this.items[0]
+    //   }
+    //   // 队列是否为空
+    //   Queue.prototype.isEmpty = function (el) {
+    //     return this.items.length === 0
+    //   }
+    //   // 队列中元素的个数
+    //   Queue.prototype.size = function (el) {
+    //     return this.items.length
+    //   }
+    //   // 将队列转成字符串
+    //   Queue.prototype.toString = function (el) {
+    //     return this.items.join('')
+    //   }
+    // }
     // 使用队列
     // var queue = new Queue()
     // queue.enqueue(1)
@@ -59,33 +60,33 @@
     // console.log('queue.size', queue.size());
 
     // 面试题：击鼓传花 通过队列实现
-    function passGame(nameList, num) {
-      // 1 创建队列结构
-      var queue = new Queue()
-      // 2 将所有人加入到队列
-      nameList.forEach(e => {
-        queue.enqueue(e)
-      });
-      // 3 让这些人开始数数字
-      // 不是num的时候从新加入到队列的末尾。 如果是num这个数字的时候将其从队列中删除
-      // 3.1 num数字之前的人重新放入到队列的末尾
-      while (queue.size() > 1) {
-        for (let i = 0; i < num - 1; i++) {
-          queue.enqueue(queue.dequeue())
-        }
-        // 3.2 num对应这个人， 直接从队列中删除掉
-        queue.dequeue()
-      }
-      // 4 获取剩下的那个人的位置
-      console.log('queue.size()', queue.size());
-      var enName = queue.front()
-      console.log('最后剩下的人',  enName);
-      return nameList.indexOf(enName)
-    }
+    // function passGame(nameList, num) {
+    //   // 1 创建队列结构
+    //   var queue = new Queue()
+    //   // 2 将所有人加入到队列
+    //   nameList.forEach(e => {
+    //     queue.enqueue(e)
+    //   });
+    //   // 3 让这些人开始数数字
+    //   // 不是num的时候从新加入到队列的末尾。 如果是num这个数字的时候将其从队列中删除
+    //   // 3.1 num数字之前的人重新放入到队列的末尾
+    //   while (queue.size() > 1) {
+    //     for (let i = 0; i < num - 1; i++) {
+    //       queue.enqueue(queue.dequeue())
+    //     }
+    //     // 3.2 num对应这个人， 直接从队列中删除掉
+    //     queue.dequeue()
+    //   }
+    //   // 4 获取剩下的那个人的位置
+    //   console.log('queue.size()', queue.size());
+    //   var enName = queue.front()
+    //   console.log('最后剩下的人',  enName);
+    //   return nameList.indexOf(enName)
+    // }
     // 测试击鼓传花
-    var list = ['lily', 'lucy', 'tom', 'lilei', 'why']
+    // var list = ['lily', 'lucy', 'tom', 'lilei', 'why']
 
-    console.log(passGame(list, 8));
+    // console.log(passGame(list, 8));
   </script>
 </body>
 
